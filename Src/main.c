@@ -6,29 +6,38 @@ int main(void)
 	while(1){}
 }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-/*HEJ MED DIG*/
-
-//Hellooooo
-
-
-//Hejsa (Freja)
-
-// hej igen
-
-
-//test
 
 
 
 
-//im backkkk
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //Freja
-
-
-
-
-
-
-/&/test
+//blablablaaaa
+//hihihi
