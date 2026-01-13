@@ -6,6 +6,7 @@ int main(void)
 	while(1){}
 }
 
+<<<<<<< HEAD
 /*HEJ MED DIG*/
 
 //Hellooooo
@@ -17,3 +18,5 @@ int main(void)
 
 
 //test
+=======
+>>>>>>> a146205d424e6066dc804989da0aab7133714a5d
