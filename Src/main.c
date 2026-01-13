@@ -7,6 +7,7 @@ int main(void)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*HEJ MED DIG*/
 
 //Hellooooo
@@ -20,3 +21,10 @@ int main(void)
 //test
 =======
 >>>>>>> a146205d424e6066dc804989da0aab7133714a5d
+=======
+
+
+
+
+//im backkkk
+>>>>>>> 44f1b6b63cecc34a0d9563fd021f26bc400d15f9
