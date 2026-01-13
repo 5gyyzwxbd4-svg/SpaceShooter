@@ -24,7 +24,11 @@ int main(void)
 
 
 //im backkkk
+<<<<<<< HEAD
 //ette er mig
+=======
+//Freja
+>>>>>>> 919783bc2efd27daad04c907480adaccdef70640
 
 
 
