@@ -6,12 +6,3 @@ int main(void)
 	while(1){}
 }
 
-/*HEJ MED DIG*/
-
-//Hellooooo
-
-
-//Hejsa (Freja)
-
-// hej igen
-
