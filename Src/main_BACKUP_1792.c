@@ -10,8 +10,4 @@ int main(void)
 
 //Hellooooo
 
-<<<<<<< HEAD
 //Hejsa
-=======
-// hej igen
->>>>>>> 892ab412096246bb15c1c4bd010afbfae59173e6
