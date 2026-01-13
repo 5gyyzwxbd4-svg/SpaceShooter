@@ -24,7 +24,7 @@ int main(void)
 
 
 //im backkkk
-
+//ette er mig
 
 
 
