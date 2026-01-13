@@ -8,6 +8,8 @@
 #include <stdio.h>
 #include <stdint.h>
 
+#define ESC 0x1B
+
 // changes color of characters in terminal
 void fgcolor(uint8_t foreground) {
     /*  Value      foreground     Value     foreground

@@ -5,5 +5,3 @@
  *      Author: malth
  */
 
-/* tegne et vindou
-
