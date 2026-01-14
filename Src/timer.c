@@ -8,7 +8,14 @@
 
 #include "stm32f30x_conf.h" // STM32 config
 #include "30010_io.h" // Input/output library for this course
+#include <stdint.h>
+#include <stdio.h>
 #include "timer.h"
+
+
+volatile uint16_t tick_10ms = 0;     // stiger 1 i værdi hvert 10 ms. -- GLOBAL VARIABEL
+volatile uint8_t  flag_10ms  = 0;    // skal sættes til 1 hvert 10. ms. -- GLOBAL VARIABEL
+
 
 void timer15_init()
 {
@@ -44,6 +51,11 @@ void timer15_init()
 void TIM1_BRK_TIM15_IRQHandler(void) {
 
 	//kode for interrupt
+
+	tick_10ms++;
+	flag_10ms = 1;
+
+
 
 	TIM15->SR &= ~0x0001; // Clear interrupt bit
 
