@@ -40,7 +40,6 @@ void timer15_init()
     TIM15->CR1 |= TIM_CR1_CEN;
 }
 
-volatile int16_t flag;
 
 void TIM1_BRK_TIM15_IRQHandler(void) {
 
