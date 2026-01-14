@@ -2,7 +2,7 @@
  * astroids.c
  *
  *  Created on: 13. jan. 2026
- *      Author: root
+ *      Author: Alex
  */
 
 #include "ansi.h"
@@ -11,8 +11,10 @@
 #include <stdint.h>
 
 
+
 void spawn_astroids(void) {
-    gotoxy(100,10);
+	// funktionen printer en simpel astroide.
+	gotoxy(100,10);
 	const char *astroide[] = {
         "            .:-+*#*++==++-:.",
         "         :+%#**=++----=***%*+.",
@@ -36,8 +38,11 @@ void spawn_astroids(void) {
     }
 }
 
-void move_astroids(uint8_t x, uint8_t y) {
-	gotoxy(x,y);
+void move_astroids(int16_t x) {
+	// funktionen starter med at fjerne astroiden på dens nuværende lokation og printer
+	// derefter en ny astroide til højre.
+
+	gotoxy(x,10);
 	const char *astroide[] = {
 	        "            .:-+*#*++==++-:.",
 	        "         :+%#**=++----=***%*+.",
@@ -55,7 +60,7 @@ void move_astroids(uint8_t x, uint8_t y) {
 	    };
 	int lines = sizeof(astroide) / sizeof(astroide[0]);
 	    for (int i = 0; i < lines; i++) {
-	        gotoxy(x-1,10+i);
+	        gotoxy(x-1, 10+i);
 	    	printf("                                   ");
 	    }
 
@@ -64,4 +69,12 @@ void move_astroids(uint8_t x, uint8_t y) {
 	    	printf("%s\n", astroide[i]);
 	    }
 
+
+	    // Fjern astroide, når den kommer helt til højre.
+	        for (int i = 0; i < lines; i++) {
+	            gotoxy(1, 10 + i);
+	            printf("                                   ");
+	        }
+
 }
+

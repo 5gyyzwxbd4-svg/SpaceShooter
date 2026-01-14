@@ -8,7 +8,7 @@
 #ifndef ASTROIDS_H_
 #define ASTROIDS_H_
 void spawn_astroids(void);
-void move_astroids(uint8_t x, uint8_t y);
+void move_astroids(int16_t x);
 
 
 
