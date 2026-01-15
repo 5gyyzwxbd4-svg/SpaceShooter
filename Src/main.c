@@ -4,7 +4,7 @@
 
 int main(void)
 {
-	uart_init( 9600 ); // Initialize USB serial emulation at 9600 baud
-	printf("Hello World!\n"); // Show the world you are alive!
-	while(1){}
+    uart_init( 9600 ); // Initialize USB serial emulation at 9600 baud
+    printf("Hello World!\n"); // Show the world you are alive!
+    while(1){}
 }
