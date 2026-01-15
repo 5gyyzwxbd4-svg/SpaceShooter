@@ -9,8 +9,6 @@
 
 //----------------INIT----------------------
 void init_player(player *p){
-	adc_init();
-
 	p->x = 1;
 	p->y = 25;
 	p->hp = 3;
@@ -76,51 +74,91 @@ uint16_t adc_read_channel(uint8_t channel){
 //---------------update--------------
 
 void draw_player(player *p){
-	//
+	gotoxy(p->x, p->y);
+	fgcolor(11);
+	const char *space_ship[] = {
+	    "  -+:   ",
+	    "  :+.   ",
+	    "-=++-+*=",
+	    "-=++-+*=",
+	    "  :+.   ",
+	    "  -+:   "
+	};
+	for(int i = 0; i < 6; i++){
+	    gotoxy(p->x, p->y + i);
+	    printf("%s", space_ship[i]);
+	}
+	resetbgcolor();
 }
 
-void update_player(player *p){
-	move_player(p);
-	take_damage_player(p);
+uint16_t update_player(player *p){
+	int moved;
+	p->old_x = p->x;
+	p->old_y = p->y;
+
+	moved = move_player(p);
 	keep_player_in_game(p);
+	take_damage_player(p);
+
+	return moved;
 }
 
-void move_player(player *p){
-	//joystick=analoge spændinger i x og y (læs med adc)
-	//PA0 = x (ADC1_IN1 - left/right)
-	//PA1 = y (ADC1_IN2 - up/down)
-	uint16_t joy_x = adc_read_channel(1); // PA0
-	uint16_t joy_y = adc_read_channel(2); // PA1
+uint16_t move_player(player *p){
+	int moved = 0;
+	uint16_t joy_x = adc_read_channel(1); // PA0 (ADC1_IN1, left/right)
+	uint16_t joy_y = adc_read_channel(2); // PA1 (ADC1_IN2, up/down)
 
 	//right/left
-	if (joy_x > 2300){
+	if (joy_x > 1325){
 		p->x += 1; //1=speed lige nu
-	}else if(joy_x<1800){
+		moved = 1;
+	}else if(joy_x<1025){
 		p->x -= 1;
+		moved = 1;
 	}
 
 	//down/up
-	if(joy_y<1800){
+	if(joy_y<10){
 		p->y += 1;
-	}else if(joy_y>2300){
+		moved = 1;
+	}else if(joy_y>30){
 		p->y -= 1;
+		moved = 1;
 	}
-
+	return moved;
 }
 
 void keep_player_in_game(player *p){
+	//mangler værdier for størrelse af vindue
 
+	// Midlertidige testværdier
+	const int MIN_X = 1;
+	const int MIN_Y = 1;
+	const int MAX_X = 78; // 80 - player_width(2)
+	const int MAX_Y = 24; // 1 linje høj sprite
+
+	if (p->x < MIN_X) p->x = MIN_X;
+	if (p->x > MAX_X) p->x = MAX_X;
+	if (p->y < MIN_Y) p->y = MIN_Y;
+	if (p->y > MAX_Y) p->y = MAX_Y;
 }
 
 void take_damage_player(player *p){
 	//hvis ramt af asteroide
 	//hvis ramt af enemy
 	//hvis enemy forlader skærmen (de smadrer hjembyen!!)
-	if (hp<0){
+	if (p->hp<0){
 		//game over
 		reset_player(p);
 	}
 
+}
+
+void erase_player(player *p){
+	for(int i = 0; i < 6; i++){
+		gotoxy(p->old_x, p->old_y + i);
+	    printf("                    ");
+	}
 }
 
 void reset_player(player *p){

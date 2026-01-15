@@ -9,13 +9,17 @@
 #define PLAYER_H_
 
 #include <stdint.h>
+#include <stdio.h>
+#include "stm32f30x_conf.h"
+#include "ansi.h"
 
 
 typedef struct{
-	int16_t x, y;
-	int16_t vx, vy;
-	int16_t hp;
-	int16_t score;
+	uint16_t x, y;
+	uint16_t old_x, old_y;
+	uint16_t vx, vy;
+	uint16_t hp;
+	uint16_t score;
 }player;
 
 //joystick
@@ -25,10 +29,11 @@ uint16_t adc_read_channel(uint8_t channel);
 //player
 void init_player(player *p);
 void draw_player(player *p);
-void update_player(player *p);
-void move_player(player *p);
+uint16_t update_player(player *p);
+uint16_t move_player(player *p);
 void keep_player_in_game(player *p);
 void take_damage_player(player *p);
+void erase_player(player *p);
 void reset_player(player *p);
 
 
