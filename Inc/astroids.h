@@ -7,8 +7,23 @@
 
 #ifndef ASTROIDS_H_
 #define ASTROIDS_H_
-void spawn_astroids(void);
-void move_astroids(int16_t x, int8_t stop);
+#include "player.h"
+
+typedef struct{
+		int16_t x;
+		int16_t y;
+}astroid;
+
+typedef struct{
+		int16_t x_min;
+		int16_t x_max;
+		int16_t y_min;
+		int16_t y_max;
+}astroid_bound;
+
+
+void init_astroid(astroid *a, astroid_bound *ab);
+void move_astroid(astroid *a, astroid_bound *ab, player *p);
 
 
 
