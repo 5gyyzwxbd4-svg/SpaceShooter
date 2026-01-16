@@ -16,7 +16,6 @@ void TIM1_BRK_TIM15_IRQHandler(void); // interrupts funktion
 
 extern volatile uint16_t tick_10ms;     // stiger 1 i værdi hvert 10 ms. -- GLOBAL VARIABEL
 extern volatile uint8_t  flag_10ms;    // skal sættes til 1 hvert 10. ms. -- GLOBAL VARIABEL
-extern volatile uint16_t tick_player_10ms; //player control timer
 
 
 #endif /* TIMER_H_ */

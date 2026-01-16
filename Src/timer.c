@@ -15,7 +15,6 @@
 
 volatile uint16_t tick_10ms = 0;     // stiger 1 i værdi hvert 10 ms. -- GLOBAL VARIABEL
 volatile uint8_t  flag_10ms  = 0;    // skal sættes til 1 hvert 10. ms. -- GLOBAL VARIABEL
-volatile uint16_t tick_player_10ms = 0; //players tick
 
 void timer15_init()
 {
@@ -53,7 +52,6 @@ void TIM1_BRK_TIM15_IRQHandler(void) {
 	//kode for interrupt
 
 	tick_10ms++;
-	tick_player_10ms++;
 	flag_10ms = 1;
 
 	TIM15->SR &= ~0x0001; // Clear interrupt bit

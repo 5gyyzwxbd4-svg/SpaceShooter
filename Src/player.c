@@ -74,6 +74,28 @@ uint16_t adc_read_channel(uint8_t channel){
 //---------------update--------------
 
 void draw_player(player *p){
+	/*----------- shield powerup --------------*/
+	if(p->shield_active){
+		fgcolor(6);
+
+		//top
+		gotoxy(p->x - 1, p->y - 1);
+		printf(" --------- ");
+
+		//sider
+		for(int i = 0; i < 6; i++){
+			gotoxy(p->x - 2, p->y + i);
+			printf("|");
+			gotoxy(p->x + 8, p->y + i);
+			printf("|");
+		}
+
+		//bund
+		gotoxy(p->x - 1, p->y + 6);
+		printf(" --------- ");
+	}
+
+	/* ---------- spiller ----------------*/
 	gotoxy(p->x, p->y);
 	fgcolor(11);
 	const char *space_ship[] = {
@@ -92,13 +114,28 @@ void draw_player(player *p){
 }
 
 uint16_t update_player(player *p){
-	int moved;
+	static uint8_t move_tick = 0; //tæller antal 10 ms ticks
+	int moved = 0;
+
 	p->old_x = p->x;
 	p->old_y = p->y;
 
-	moved = move_player(p);
-	keep_player_in_game(p);
 	take_damage_player(p);
+	p->shield_just_ended = 0;
+	if(p->shield_active){
+		p->shield_timer++;
+		if(p->shield_timer >= 1500){
+			p->shield_active = 0; //skal deaktiveres efter 15 sekunder
+			p->shield_just_ended = 1;
+		}
+	}
+
+	move_tick++;
+	if (move_tick >= 8){ //sørger for den kun opdateres hvert 80 ms
+		move_tick = 0;
+		moved = move_player(p);
+		keep_player_in_game(p);
+	}
 
 	return moved;
 }
@@ -134,8 +171,8 @@ void keep_player_in_game(player *p){
 	// Midlertidige testværdier
 	const int MIN_X = 1;
 	const int MIN_Y = 1;
-	const int MAX_X = 78; // 80 - player_width(2)
-	const int MAX_Y = 24; // 1 linje høj sprite
+	const int MAX_X = 130-8;
+	const int MAX_Y = 40-6;
 
 	if (p->x < MIN_X) p->x = MIN_X;
 	if (p->x > MAX_X) p->x = MAX_X;
@@ -147,19 +184,38 @@ void take_damage_player(player *p){
 	//hvis ramt af asteroide
 	//hvis ramt af enemy
 	//hvis enemy forlader skærmen (de smadrer hjembyen!!)
+
+	/*if(1/*ramt af asteroid/enemy){
+		if(p->shield_active){
+			p->shield_active = 0;
+			return;
+		}
+		p->hp--;
+	}*/
+
 	if (p->hp<0){
 		//game over
 		reset_player(p);
 	}
-
 }
 
-void erase_player(player *p){
-	for(int i = 0; i < 6; i++){
-		gotoxy(p->old_x, p->old_y + i);
-	    printf("                    ");
+void erase_player(player *p)
+{
+	if (p->shield_active || p->shield_just_ended){
+		// slet hele shield + spiller
+		for (int i = -1; i <= 6; i++) {
+			gotoxy(p->old_x - 2, p->old_y + i);
+			printf("            "); // 12 mellemrum
+		}
+	}else{
+		// slet kun spilleren
+		for (int i = 0; i < 6; i++){
+			gotoxy(p->old_x, p->old_y + i);
+			printf("        "); // 8 mellemrum
+		}
 	}
 }
+
 
 void reset_player(player *p){
 	init_player(p);
