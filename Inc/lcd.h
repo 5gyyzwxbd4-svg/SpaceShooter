@@ -27,10 +27,22 @@ void update_lcd(uint8_t* buffer);
 
 // Tegn tekst
 void lcd_write_string(char c, uint16_t x, int y, uint8_t* buffer);
+void lcd_write_string_px(const char* text, uint8_t x, uint8_t y, uint8_t* buffer);
+void lcd_write_char_px(char c, uint8_t x, uint8_t y, uint8_t* buffer);
 void lcd_draw_lives_label(uint8_t x, uint8_t y, uint8_t* buffer);
 
 // Tegn hjerter
 void lcd_draw_tiny_heart(uint8_t x, uint8_t y, uint8_t* buffer);
 void lcd_draw_tre_hearts(uint8_t x, uint8_t y, uint8_t* buffer);
+void lcd_draw_lives(uint8_t x_start, uint8_t y, uint8_t* buffer, uint8_t life);
+
+// Tegn timer
+void lcd_draw_time_label(uint8_t x, uint8_t line, uint8_t* buffer);
+
+//SCORE
+uint32_t calculate_score(void);
+void lcd_draw_score_value(uint8_t x, uint8_t y, uint8_t* buffer);
+
+
 
 #endif /* LCD_H_ */
